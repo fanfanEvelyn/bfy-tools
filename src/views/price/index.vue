@@ -50,7 +50,7 @@
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
-    <el-dialog :visible.sync="addVisible" title="新增数据" width="50%">
+    <el-dialog :visible.sync="addVisible" title="新增报价" width="50%">
       <el-form ref="addFormData" :model="addFormData" :rules="rules" label-width="100px" class="demo-ruleForm" style="padding:0px 50px">
         <el-form-item label="活动名称" prop="name">
           <el-input v-model="addFormData.name"/>
