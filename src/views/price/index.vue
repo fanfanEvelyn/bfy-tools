@@ -51,7 +51,7 @@
       </span>
     </el-dialog>
     <el-dialog :visible.sync="addVisible" title="新增数据" width="50%">
-      <el-form ref="addFormData" :model="addFormData" :rules="rules" label-width="100px" class="demo-ruleForm">
+      <el-form ref="addFormData" :model="addFormData" :rules="rules" label-width="100px" class="demo-ruleForm" style="padding:0px 50px">
         <el-form-item label="活动名称" prop="name">
           <el-input v-model="addFormData.name"/>
         </el-form-item>
@@ -64,7 +64,7 @@
         <el-form-item label="ShippingType" prop="ShippingType">
           <el-input v-model="addFormData.ShippingType"/>
         </el-form-item>
-        <el-form-item label="ShippingType" prop="ShippingType">
+        <el-form-item label="是否生效" prop="ShippingType">
           <el-radio-group v-model="addFormData.UseFlag">
             <el-radio :label="1">是</el-radio>
             <el-radio :label="0">否</el-radio>
