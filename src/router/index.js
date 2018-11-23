@@ -38,24 +38,24 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/formdata',
+    path: '/priceManage',
     component: Layout,
     children: [
       {
-        path: 'list',
-        name: 'list',
-        component: () => import('@/views/table/index'),
-        meta: { title: '列表', icon: 'table' }
+        path: 'price_list',
+        name: 'priceList',
+        component: () => import('@/views/price/index'),
+        meta: { title: '报价管理', icon: 'table' }
       }
     ]
   },
   {
-    path: '/report',
+    path: '/reportManage',
     component: Layout,
     children: [
       {
-        path: 'report',
-        name: 'Report',
+        path: 'report_list',
+        name: 'reportManage',
         component: () => import('@/views/report/index'),
         meta: { title: '报表管理', icon: 'form' }
       }
