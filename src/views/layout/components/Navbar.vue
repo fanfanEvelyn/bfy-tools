@@ -62,6 +62,8 @@ export default {
 .navbar {
   height: 50px;
   line-height: 50px;
+  // background: #41b883;
+  color:#000;
   border-radius: 0px !important;
   .hamburger-container {
     line-height: 58px;
