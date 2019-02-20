@@ -15,8 +15,12 @@
         <el-button type="success" @click="addVisible = true">新增</el-button>
       </el-col>
     </el-row>
-    <el-table v-loading="loading" :data="tableData" :cell-class-name="cell" element-loading-text="拼命加载中" border style="width: 100%">
-      <el-table-column prop="Id" label="Id" align="center" />
+    <el-table :data="tableData" :cell-class-name="cell" border style="width: 100%">
+      <el-table-column label="Id" align="center">
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.Id" placeholder="请输入内容" />
+        </template>
+      </el-table-column>
       <el-table-column prop="Name" label="名称" align="center" />
       <el-table-column prop="Price" label="价格" align="center" />
       <el-table-column prop="PriceType" label="计算单位" align="center" />
@@ -33,14 +37,7 @@
     </el-table>
     <el-row :gutter="0" style="margin:30px">
       <el-col :span="10" :push="psize">
-        <el-pagination
-          :current-page="pageIndex"
-          :page-sizes="[10, 20, 30, 40]"
-          :page-size="pageSize"
-          :total="total"
-          layout="total, sizes, prev, pager, next, jumper"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange" />
+        <el-pagination :current-page="pageIndex" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="total" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
       </el-col>
     </el-row>
     <el-dialog :visible.sync="dialogVisible" title="查看详情" width="40%">
@@ -53,16 +50,16 @@
     <el-dialog :visible.sync="addVisible" title="新增报价" width="50%">
       <el-form ref="addFormData" :model="addFormData" :rules="rules" label-width="100px" class="demo-ruleForm" style="padding:0px 50px">
         <el-form-item label="活动名称" prop="name">
-          <el-input v-model="addFormData.name"/>
+          <el-input v-model="addFormData.name" />
         </el-form-item>
         <el-form-item label="价格" prop="price">
-          <el-input v-model="addFormData.price"/>
+          <el-input v-model="addFormData.price" />
         </el-form-item>
         <el-form-item label="计算单位" prop="PriceType">
-          <el-input v-model="addFormData.PriceType"/>
+          <el-input v-model="addFormData.PriceType" />
         </el-form-item>
         <el-form-item label="ShippingType" prop="ShippingType">
-          <el-input v-model="addFormData.ShippingType"/>
+          <el-input v-model="addFormData.ShippingType" />
         </el-form-item>
         <el-form-item label="是否生效" prop="ShippingType">
           <el-radio-group v-model="addFormData.UseFlag">
@@ -81,13 +78,18 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+// import { getList } from '@/api/table'
 export default {
   data() {
     return {
       text: '名称',
       psize: 14,
-      tableData: [],
+      tableData: [
+        {
+          id: ''
+
+        }
+      ],
       searchData: {
         name: ''
       },
@@ -128,25 +130,26 @@ export default {
       }
     },
     getDataList() {
-      const params = {
-        name: this.searchData.name,
-        page: this.pageIndex,
-        page_size: this.pageSize
-      }
-      getList(params).then(res => {
-        if (res.status === 200) {
-          this.loading = false
-          this.tableData = res.data
-        } else {
-          this.loading = false
-        }
-      })
+      // const params = {
+      //   name: this.searchData.name,
+      //   page: this.pageIndex,
+      //   page_size: this.pageSize
+      // }
+      // getList(params).then(res => {
+      //   if (res.status === 200) {
+      //     this.loading = false
+      //     this.tableData = res.data
+      //   } else {
+      //     this.loading = false
+      //   }
+      // })
     },
     addData() {
       this.addVisible = false
       console.log(this.addFormData)
     },
     handleView(a, b) {
+      console.log(b)
       this.dialogVisible = true
       this.name = b.Name
     },
