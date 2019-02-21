@@ -1,32 +1,73 @@
 <template>
-  <div class="dashboard-container">
-    <div class="dashboard-text">name:admin</div>
-    <div class="dashboard-text">roles:admin</div>
-  </div>
+  <div id="echart" ref="chart" class="echart" />
 </template>
-
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
-  name: 'Dashboard',
+  data() {
+    return {
+      myChart: {}
+    }
+  },
   computed: {
-    ...mapGetters([
-      'name',
-      'roles'
-    ])
+    origin() {
+      return this.data
+    },
+    opt() {
+      const obj = {
+        title: {
+          text: '网站数据来源',
+          x: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+        },
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: [
+              { value: 335, name: '直接访问' },
+              { value: 310, name: '邮件营销' },
+              { value: 234, name: '联盟广告' },
+              { value: 135, name: '视频广告' },
+              { value: 1548, name: '搜索引擎' }
+            ],
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      }
+      return obj
+    }
+  },
+  mounted() {
+    this.setChats()
+  },
+  methods: {
+    setChats() {
+      const myChart = this.$echarts.init(document.getElementById('echart'))
+      myChart.setOption(this.opt)
+    }
   }
 }
 </script>
-
-<style rel="stylesheet/scss" lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
+<style>
+.echart {
+  width: 500px;
+  height: 400px;
+  margin: 30px auto;
 }
 </style>

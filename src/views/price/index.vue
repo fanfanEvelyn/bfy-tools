@@ -37,7 +37,7 @@
     </el-table>
     <el-row :gutter="0" style="margin:30px">
       <el-col :span="10" :push="psize">
-        <el-pagination :current-page="pageIndex" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize" :total="total" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+        <el-pagination :current-page="pageIndex" :page-sizes="[5, 10, 20, 30]" :page-size="pageSize" :total="total" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
       </el-col>
     </el-row>
     <el-dialog :visible.sync="dialogVisible" title="查看详情" width="40%">
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-// import { getList } from '@/api/table'
+import { getList } from '@/api/table'
 export default {
   data() {
     return {
@@ -130,19 +130,19 @@ export default {
       }
     },
     getDataList() {
-      // const params = {
-      //   name: this.searchData.name,
-      //   page: this.pageIndex,
-      //   page_size: this.pageSize
-      // }
-      // getList(params).then(res => {
-      //   if (res.status === 200) {
-      //     this.loading = false
-      //     this.tableData = res.data
-      //   } else {
-      //     this.loading = false
-      //   }
-      // })
+      const params = {
+        name: this.searchData.name,
+        page: this.pageIndex,
+        page_size: this.pageSize
+      }
+      getList(params).then(res => {
+        if (res.status === 200) {
+          this.loading = false
+          this.tableData = res.data
+        } else {
+          this.loading = false
+        }
+      })
     },
     addData() {
       this.addVisible = false
